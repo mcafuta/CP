@@ -1,0 +1,56 @@
+{% extends "header.html" %}
+{% block head %}
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/substitution.leaderboard.css')}}"/>
+{% endblock %}
+{% block body %}
+
+<div id="nav-bar-2"><h2>Lestvice</h2></div>
+<div id="leaderboard-container">
+
+    <div class="tab">
+        <a class="tablinks" href="{{url_for('substitution.leaderboard', difficulty='easy')}}">Lahko</a>
+        <a class="tablinks" href="{{url_for('substitution.leaderboard', difficulty='medium')}}">Srednje</a>
+        <a class="tablinks" href="{{url_for('substitution.leaderboard', difficulty='hard')}}">Težko</a>
+        <a class="tablinks" href="{{url_for('substitution.leaderboard', difficulty='caesar')}}">Caesar</a>
+    </div>
+    {% for user in users %}
+        <div class="row">
+        {%  if loop.index < 2 %}
+            <header>
+                <div id="col-1">
+                    <span id="top-number">1.</span>
+                    <img id="top-profile" src="{{ url_for('static', filename = 'images/bell.png') }}">
+                    <span id="top-name">{{ user[0] }}</span>
+                </div>
+                <div id="col-2">
+                    <span id="top-diff">Težavnost</span>
+                    <span id="top-value">{{ user[1] }}</span>
+                </div>
+                <div id="col-3">
+                    <img src="{{ url_for('static', filename = 'images/substitution/clock-icon-s.png') }}" id="clock">
+                    <span id="top-time">{{ user[2] }}</span>
+                </div>
+            </header>
+        {% else %}
+            <div class="player">
+                <div class="col-1">
+                    <span class="number">{{ loop.index }}.</span>
+                    <img class="profile" src={{ url_for('static', filename = 'images/substitution/profile-s.png') }}>
+                    <span class="name">{{ user[0] }}</span>
+                </div>
+                <div class="col-2">
+                    <span class="diff">Težavnost</span>
+                    <span class="value">{{ user[1] }}</span>
+                </div>
+                <div class="col-3">
+                    <img src={{ url_for('static', filename = 'images/substitution/clock-icon-s.png') }} class="clock">
+                    <span class="time">{{ user[2] }}</span>
+                </div>
+            </div>
+        {% endif %}
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

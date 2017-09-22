@@ -1,0 +1,84 @@
+{% extends "header.html" %}
+{%  block head %}
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery.jqplot.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/substitution.css')}}" />
+    <!-- JS PLUGINS -->
+    <script type="text/javascript" language="javascript" src="{{ url_for('static', filename='js/substitution/plugins/jquery.jqplot.min.js') }}"></script>
+    <script type="text/javascript" language="javascript" src={{ url_for('static', filename="js/substitution/plugins/jqplot.categoryAxisRenderer.js") }}></script>
+    <script type="text/javascript" language="javascript" src={{ url_for('static', filename="js/substitution/plugins/jqplot.barRenderer.js") }}></script>
+    <script type="text/javascript" language="javascript" src={{ url_for('static', filename="js/substitution/plugins/jqplot.canvasTextRenderer.js") }}></script>
+    <script type="text/javascript" language="javascript" src={{ url_for('static', filename="js/substitution/plugins/jqplot.canvasAxisLabelRenderer.js") }}></script>
+    <script type="text/javascript" language="javascript" src={{ url_for('static', filename="js/substitution/plugins/jqplot.canvasAxisTickRenderer.js") }}></script>
+    <script type="text/javascript" language="javascript" src={{ url_for('static', filename="js/substitution/plugins/jqplot.pointLabels.js") }}></script>
+    <script type="text/javascript" language="javascript" src={{ url_for('static', filename='js/substitution/plugins/jquery.ui.touch-punch.min.js') }}></script>
+    <script type="text/javascript" language="javascript" src={{ url_for('static', filename='js/substitution/plugins/md5.js') }}></script>
+    <!-- JS LOGIC -->
+    <script type="text/javascript" language="javascript" src={{ url_for('static', filename='js/substitution/substitution.util.js') }}></script>
+    <script type="text/javascript" language="javascript" src={{ url_for('static', filename='js/substitution/substitution.ui.js') }}></script>
+    <script type="text/javascript" language="javascript" src={{ url_for('static', filename='js/substitution/substitution.event.js') }}></script>
+    <script type="text/javascript" language="javascript" src={{ url_for('static', filename='js/substitution/substitution.graph.js') }}></script>
+    <script type="text/javascript" language="javascript" src={{ url_for('static', filename='js/substitution/substitution.timer.js') }}></script>
+    <script type="text/javascript" language="javascript" src={{ url_for('static', filename='js/substitution/substitution.index.js') }}></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            var args = {
+                input: {{input|safe}},
+                lang: "{{lang}}",
+                original_hash: "{{text_hash}}",
+                difficulty: "{{difficulty}}",
+                foreign: {% if foreign %} true {% else %} false {% endif %},
+                next: "{{url_for('.play', difficulty = difficulty, idx = next)}}",
+                insertURL: "{{url_for('.leaderboard_insert')}}",
+                staticDir: "{{url_for('static', filename='')}}",
+                baseURL: "{{url_for('index')}}",
+                level: "{{level}}",
+                text_original: "{{ text_original|safe}}"
+            };
+            text_original= "{{ text_original|safe}}";
+            storeVariables(args);
+            load();
+        };
+    </script>
+{% endblock %}
+{% block body %}
+    <div id="nav-bar-2">
+        <div id="nav-bar-container">
+            <label id="btn-reset" class="btn nav-btn glyphicon glyphicon-repeat"></label>
+            <span id="nav-bar-title">Zamenjalka</span>
+            <label id="btn-next" class="btn nav-btn glyphicon glyphicon-play"></label>
+        </div>
+    </div>
+    <div id="container-logic">
+        <div id="freeLetterContainer"></div>
+        <div id="encryptedLetterContainer"></div>
+        <div id="solvedMessageContainer" class="wrap"></div>
+        <div id="letterFrequencyContainer"></div>
+
+        <div id="chartDiv">
+            <div id="info1" class="info-chart">
+                <div id="info-btn-1" class="info-chart"></div>
+                <div id="info-msg-1" class="info-chart"></div>
+            </div>
+            <div id="chart1" class="chart"></div>
+            <div id="info2" class="info-chart">
+                <div id="info-btn-2" class="info-chart"></div>
+                <div id="info-msg-2" class="info-chart"></div>
+            </div>
+            <div id="chart2" class="chart"></div>
+            <div id="slider">
+                <div id="custom-handle" class="ui-slider-handle"></div>
+            </div>
+            <br>
+        </div>
+
+        {% include ('substitution.stats.%s.html' % lang) %}
+        </br>
+
+    </div>
+    <div id="fixed-div">
+    </div>
+
+    {% include ('substitution.modal.html') %}
+
+{% endblock %}

@@ -1,0 +1,320 @@
+{% extends "header.html" %}
+{% block body %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='alphabet.css')}}" />
+<script type="text/javascript" src = "{{url_for('static', filename='alphabet.js')}}"></script>
+<script type="text/javascript">
+    var staticDir = "{{url_for('static', filename='')}}";
+    var flagsDir = "{{url_for('static', filename='images/'+alphabetForLearning+'/')}}";
+    var letter = "{{letter}}", mode = "{{mode}}", level = "{{level}}",
+    choices = "{{choices}}", alphabet = "{{alphabet}}", words = "{{words}}";
+    window.onload = function(){initialize_alphabet(mode, level);};
+</script>
+
+<!-- POP-UP INSTRUCTIONS -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <div id="header">
+            <span id="cl" class="close">&times;</span>
+            <h2>Navodila</h2>
+        </div>
+        <div class="modal-body">
+            {% if mode == "read" %}
+                {% if level == "easy" %}<p> Kratka navodila za: branje lahko! </p>
+                {% elif level == "medium" %}<p> Kratka navodila za: branje srednje! </p>
+                {% elif level == "hard" %}<p> Kratka navodila za: branje tezko! </p>
+                {% endif %}
+            {% elif mode == "write" %}
+                {% if level == "easy" %}<p> Kratka navodila za: pisanje lahko! </p>
+                {% elif level == "medium" %}<p> Kratka navodila za: pisanje srednje! </p>
+                {% elif level == "hard" %}<p> Kratka navodila za: pisanje tezko! </p>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="row">
+   <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="panel panel-default level-{% print mode %}-{% print level %}" >
+            <div class="panel-heading" id="head">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 alignVerticalCenter">
+                        <b><span class="pozdrav1">{% print alphabetForLearning %}</span></b>
+                        {% if intro != "1" %}<button id="pop-up" class="align-middle">Navodila</button>{% endif %}
+                    </div>
+                    <div class="menu-nav">
+                        <div id="col-1" class="menu-nav-item">
+                            <a href="{{url_for('alphabet.index', selected_alphabet=alphabetForLearning, )}}"><img src="{{url_for('static', filename='home-icon.png')}}"></a>
+                        </div>
+                        <div id="col-2" class="menu-nav-item">
+                            <!--
+                            <div class="dropdown">
+                              <a value = "Write" id="writeButton" class="{% if mode == "write" %}active{% endif %}" ><span>Pisanje</span></a> 
+                              href="{{url_for('alphabet.display_excercise', selected_alphabet='flags', mode='write', level='easy')}}"
+                              <div id="myDropdown" class="dropdown-content">
+                                <a href="#">Link 1</a>
+                                <a href="#">Link 2</a>
+                                <a href="#">Link 3</a>
+                              </div>
+                            </div>
+                            -->
+                            <div class="dropdown {% if mode == "write" %}active{% endif %}">
+							  <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Pisanje<span class="caret"></span></a>
+							  <ul class="dropdown-menu" role="menu">
+							  	<li><a href="{{url_for('alphabet.display_excercise', selected_alphabet='flags', mode='write', level='easy')}}">Lahko</a></li>
+							  	<li><a href="{{url_for('alphabet.display_excercise', selected_alphabet='flags', mode='write', level='medium')}}">Srednje</a></li>
+							  	<li><a href="{{url_for('alphabet.display_excercise', selected_alphabet='flags', mode='write', level='hard')}}">Težko</a></li>
+							  </ul>
+							</div>
+                        </div>
+                        <div id="col-3" class="menu-nav-item">
+                            <!--<a value = "Read" class="{% if mode == "read" %}active{% endif %}" href="{{url_for('alphabet.display_excercise', selected_alphabet='flags', mode='read', level='easy')}}"><span>Branje</span></a>-->
+                            <div class="dropdown {% if mode == "read" %}active{% endif %}">
+							  <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Branje<span class="caret"></span></a>
+							  <ul class="dropdown-menu" role="menu">
+							  	<li><a href="{{url_for('alphabet.display_excercise', selected_alphabet='flags', mode='read', level='easy')}}">Lahko</a></li>
+							  	<li><a href="{{url_for('alphabet.display_excercise', selected_alphabet='flags', mode='read', level='medium')}}">Srednje</a></li>
+							  	<li><a href="{{url_for('alphabet.display_excercise', selected_alphabet='flags', mode='read', level='hard')}}">Težko</a></li>
+							  </ul>
+							</div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            {% if intro == "1" %}
+                <div class="panel-body">
+                    <div class="container-fluid">
+                        <div class="row-fluid">
+                            <div class="">
+                                <h1>Uvod</h1>
+                                <p>Dobrodošli na strani za učenje komuniciranja s pomočjo zastavic.</p>
+                                <p>Spodaj si lahko ogledate seznam vseh črk, ki se jih lahko naučite s pomočjo te aplikacije.</p>
+                            </div>
+                                <div class="show-all-flags">
+                                {% for letter in alphabet %}
+                                <div class="f1_container">
+                                    <div class="f1_card">
+                                        {% if ((loop.index-1) // 4) % 2 == 0 %} <div class="front face {% if loop.index % 2 == 0 %}dark{% else %}light{% endif %}"><h3 class="letterA {% if loop.index % 2 == 0 %}blue{% else %}red{% endif %}">{% print letter.upper() %}</h3></div>
+                                        {% else %}<div class="front face {% if loop.index % 2 == 0 %}light{% else %}dark{% endif %}"><h3 class="letterA {% if loop.index % 2 == 0 %}red{% else %}blue{% endif %}">{% print letter.upper() %}</h3></div>
+                                        {% endif %}
+                                        <div class="back face">
+                                            <img src="{{url_for('static', filename='images/'+alphabetForLearning+'/'+letter+'.png')}}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}    
+                            </div>
+                            <div class="">
+                                <p>Pripravljeni, da začnete?</p>
+                                <a value = "Read" class="btn btn-default btn-bg {% if mode == "read" %}active{% endif %}" href="{{url_for('alphabet.display_excercise', selected_alphabet=alphabetForLearning, mode='read', level='easy')}}">Branje</a>
+                                <a value = "Write" class="btn btn-default btn-bg {% if mode == "write" %}active{% endif %}" href="{{url_for('alphabet.display_excercise', selected_alphabet=alphabetForLearning, mode='write', level='easy')}}">Pisanje</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="panel-body">
+                    <div class="container-fluid">
+                        <div class="row-fluid">
+                            
+                            {% if mode == "read" %}
+                                {% if level == "easy" %}
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 text-center">
+                                        <b>
+                                            <span id="num-points-text">Število pravilnih odgovorov</span>
+                                        </b>
+                                        <div id="points"><span id="points-display">0</span></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 arrowContainer">
+                                        <a id="prew-arrow" class="elementFloatRight"><img src="{{url_for('static', filename='arrow-left.png')}}"/></a>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 text-center" id = "coreLogic">
+                                        <!-- <a id="read_easy_help" class="btn btn-default btn-bg">Pomoč</a> -->
+                                        <div id="picture-letter" class="well">
+                                            <img src="{{url_for('static', filename='images/'+alphabetForLearning+'/'+letter+'.png')}}" />
+                                        </div>
+                                        <!--<a id="prew-arrow"><img src="{{url_for('static', filename='prew_arrow.png')}}"/></a>-->
+                                        <div id="choices">
+                                        {% for c in choices %}
+                                            <button type="button" class="btn btn-info btn-letter">{% print c.upper() %}</button>
+                                        {% endfor %}
+                                        </div>
+                                        <!--<a id="next-arrow"><img src="{{url_for('static', filename='next_arrow.png')}}"/></a>-->
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 arrowContainer">
+                                        <a id="next-arrow"><img src="{{url_for('static', filename='arrow-right.png')}}"/></a>
+                                    </div>
+                                </div>
+                                {% elif level == "medium" %}
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 text-center">
+                                        <b>
+                                            <span id="num-points-text">Število pravilnih odgovorov</span>
+                                        </b>
+                                        <div id="points"><span id="points-display">0</span></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 text-center solutionButtonContainer">
+                                        <a id="read_medium_solution" class="btn btn-default btn-bg btn-solution">Rešitev</a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 arrowContainer">
+                                        <a id="prew-arrow" class="elementFloatRight"><img src="{{url_for('static', filename='arrow-left.png')}}"/></a>
+                                    </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 text-center" id = "coreLogic">
+                                    <div id="picture-letter" class="well">
+                                        <img src="{{url_for('static', filename='images/'+alphabetForLearning+'/'+letter+'.png')}}" />
+                                    </div>
+                                    <div class="inputContainer">
+                                        <!--<a id="prew-arrow"><img src="{{url_for('static', filename='prew_arrow.png')}}"/></a>-->
+                                        <input id="letterInput" type="text" value="" maxlength="1">
+                                        <!--<a id="next-arrow"><img src="{{url_for('static', filename='next_arrow.png')}}"/></a>-->
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 arrowContainer">
+                                    <a id="next-arrow"><img src="{{url_for('static', filename='arrow-right.png')}}"/></a>
+                                </div>
+                                {% elif level == "hard" %}
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 text-center">
+                                        <b>
+                                            <span id="num-points-text">Število pravilnih odgovorov</span>
+                                        </b>
+                                        <div id="points"><span id="points-display">0</span></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 text-center solutionButtonContainer">
+                                        <a id="start-animation" class="btn btn-default btn-bg btn-solution">Začni!</a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 arrowContainer">
+                                        <a id="prew-arrow" class="elementFloatRight"><img src="{{url_for('static', filename='arrow-left.png')}}"/></a>
+                                    </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 text-center" id = "coreLogic">
+                                    <div id="picture-letter" class="well"></div>
+                                    <!--<a id="prew-arrow"><img src="{{url_for('static', filename='prew_arrow.png')}}"/></a>-->
+                                    <div id="input-string-hard"></div>
+                                    <!--<a id="next-arrow"><img src="{{url_for('static', filename='next_arrow.png')}}"/></a>-->
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 arrowContainer">
+                                    <a id="next-arrow"><img src="{{url_for('static', filename='arrow-right.png')}}"/></a>
+                                </div>
+                                {% endif %}
+                            {% elif mode == "write" %}
+                                {% if level == "easy" %} 
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 text-center">
+                                        <b>
+                                            <span id="num-points-text">Število pravilnih odgovorov</span>
+                                        </b>
+                                        <div id="points"><span id="points-display">0</span></div>
+                                    </div>
+                                </div>
+                                
+                                
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 arrowContainer">
+                                        <a id="prew-arrow" class="elementFloatRight"><img src="{{url_for('static', filename='arrow-left.png')}}"/></a>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                                        <div id="letterToGuess" class="letterToGuess text-center"><span>{% print letter.upper() %}</span></div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 arrowContainer">
+                                        <a id="next-arrow"><img src="{{url_for('static', filename='arrow-right.png')}}"/></a>
+                                    </div>
+                                </div>
+                                
+                                
+                                
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 text-center wellMarginTop" id = "coreLogic">
+                                        <div class="row">
+                                            <div id="choices" class="choices-container containerTest"> <!--class="choicesBucket" -->
+                                                {% for c in choices %}
+                                                    <div class="imageSelectionWrap picture-letter-write">
+                                                        <div id="picture-letter" class="image_option">
+                                                            <a><img class="imageSelection" src="{{url_for('static', filename='images/'+alphabetForLearning+'/'+c+'.png')}}" /></a>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                     </div>
+                                 </div>   
+                                   
+                                   
+                                {% elif level == "medium" %}
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 text-center">
+                                            <div id="letterToGuess" class="text-center"><span>{% print letter.upper() %}</span></div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                                            <b>
+                                                <span>Število pravilnih odgovorov</span>
+                                            </b>
+                                            <div id="points"><span id="poits-display">0</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 text-center">
+                                        <div id="imageCointainer">
+                                            <img id="imageRightFlag" src="{{url_for('static', filename='right_flag.png')}}">
+                                            <img id="imageBasicFigure" src="{{url_for('static', filename='basic_figure.png')}}">
+                                            <img id="imageLeftFlag" src="{{url_for('static', filename='left_flag.png')}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 text-center controlContainer">
+                                        <a id="prew-arrow"><img src="{{url_for('static', filename='prew_arrow.png')}}"/></a>
+                                        <a id="check" href="enabled"><img src="{{url_for('static', filename='check.png')}}"/></a>
+                                        <a id="next-arrow"><img src="{{url_for('static', filename='next_arrow.png')}}"/></a>
+                                    </div>
+                                {% elif level == "hard" %}
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 text-center">
+                                            <div id="letterToGuess" class="text-center"><span>{% print letter.upper() %}</span></div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                                            <b>
+                                                <span>Število pravilnih odgovorov</span>
+                                            </b>
+                                            <div id="points"><span id="poits-display">0</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 text-center">
+                                        <div id="imageCointainer">
+                                            <img id="imageRightFlag" src="{{url_for('static', filename='right_flag.png')}}">
+                                            <img id="imageBasicFigure" src="{{url_for('static', filename='basic_figure.png')}}">
+                                            <img id="imageLeftFlag" src="{{url_for('static', filename='left_flag.png')}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 text-center controlContainer">
+                                        <a id="prew-arrow"><img src="{{url_for('static', filename='prew_arrow.png')}}"/></a>
+                                        <a id="check" href="enabled"><img src="{{url_for('static', filename='check.png')}}"/></a>
+                                        <a id="next-arrow"><img src="{{url_for('static', filename='next_arrow.png')}}"/></a>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="blankSpace"></div>
+                <!-- Prenos vseh slik k odjemalcu, da aplikacija deluje tudi v offline nacinu -->
+                <div class="hidden all-flags">
+                    {% for letter in alphabet %}
+                        <img src="{{url_for('static', filename='images/'+alphabetForLearning+'/'+letter+'.png')}}" />
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "main.html" %}
+{% block body %}
+<script type="text/javascript" src = "{{url_for('static', filename='crypto.js')}}"></script>
+
+<div class="row">
+   <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="container-fluid">
+                    <div class="row-fluid">
+                    {% for i in range(num) %}
+                        <div class="row">
+                            <a href="{{url_for('.play', difficulty='ready', idx=i)}}">Vegenere {{i+1}}</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

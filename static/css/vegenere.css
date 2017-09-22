@@ -1,0 +1,206 @@
+/* Box displaying which letters are available for substitution */
+#freeLetterDisplay{
+    width: 100%;
+    text-align: center;
+}
+
+/* Box where user have crypted message */
+#messageOutput{
+    border-radius: 5px;
+    border: 2px solid #374148;
+    font-size: 18px;
+	color: #374148;
+	width: 100%;
+}
+
+/* Main element displaying both the original message and its updated substituted equivalent */
+#messageDisplay{
+    width: 100%;
+    background-color: #eee;
+    text-align: left;
+    border: 3px solid #374148;
+    border-radius: 10px;
+	padding-bottom: 5px;
+}
+
+/* Table to display the frequency of each letter in the table under the message display */
+#frequencyDisplay{
+    width: 100%;
+}
+
+/* Words are displayed individually in their own wordDisplay elements in the messageDisplay */
+.wordDisplay{
+    display: inline-block;
+}
+
+/* Element to hold both the original letter and its substitution above it */
+.letterHolder{
+    width: 20px;
+    /*height: 14px;*/
+}
+
+/* div elements containing the entire letter object with both original and substitution*/
+.letter{
+    display: inline-block;
+    width: 29px;
+    padding-left: 10px;
+	padding-right: 10px;
+    padding-top: 6px;
+
+}
+
+/* div element for the crypted letters in the message display */
+.cryptedCharacter{
+    text-align: center;
+    color: black;
+    font-family:"Times New Roman",Times,serif;
+    font-size: 15px;
+    width: 29px;
+    height: 15px;
+}
+
+/* div elements for the free letters that can be dragged about the message and free letters table */
+.decryptedCharacter{ 
+    text-align: center;
+    font-family:"Times New Roman",Times,serif;
+	font-weight: bold;
+    width: 29px;
+    height: 35px;
+    line-height: 30px;
+    font-size: 20px;
+    margin: 1px;
+    color: white;
+    border-radius: 5px;
+    background-color: #467892;
+    border: 2px solid #374148;
+    display: inline-block;
+}
+
+::-webkit-input-placeholder {
+   font-weight: normal;
+   font-size: 12px;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   font-weight: normal;
+   font-size: 12px;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   font-weight: normal;
+   font-size: 12px;
+}
+
+:-ms-input-placeholder {
+   font-weight: normal;
+   font-size: 12px;
+}
+
+.uneditableCharacter{ 
+    text-align: center;
+    font-family:"Times New Roman",Times,serif;
+    width: 5px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 20px;
+    margin: 0px;
+    display: inline-block;
+}
+
+/* div element for the letter in the message that is currently selected by the mouse */
+.highlightedLetter{ 
+    text-align: center;
+    font-family:"Times New Roman",Times,serif;
+	font-weight: bold;
+    width: 28px;
+    height: 35px;
+    line-height: 30px;
+    font-size: 20px;
+    color: #374148;
+    border-radius: 8px;
+    background-color: #eee;
+    border: 2px solid #374148;
+    display: inline-block;
+}
+
+/* Individual cell in the frequencyDisplay to display a letter and its frequency in the message */
+.letterFrequency{
+    display: inline-block;
+    background-color: #374148;
+    border-radius: 10px;
+    color: white;
+    width: 70px;
+    text-align: center;
+    height: 25px;
+    line-height: 15px;
+    font-size: 100%;
+    margin: 5px;
+    padding: 5px;
+}
+
+.letterFrequencySolved{
+    display: inline-block;
+    background-color: white;
+    border: 2px solid #374148;
+    border-radius: 10px;
+    color: #374148;
+    width: 70px;
+    text-align: center;
+    height: 25px;
+    line-height: 15px;
+    font-size: 100%;
+    margin: 5px;
+    padding: 3px;
+}
+
+.letterFrequencyHighlighted{
+    display: inline-block;
+    background-color: #dac5a4;
+    border: 2px solid #374148;
+    border-radius: 10px;
+    color: #374148;
+    width: 70px;
+    text-align: center;
+    height: 25px;
+    line-height: 15px;
+    font-size: 100%;
+    margin: 5px;
+    padding: 3px;
+}
+
+
+#inputField{
+    border-radius: 5px;
+    border: 2px solid #374148;
+    font-size: 18px;
+	color: #374148;
+	width: 70%;
+    float: right;
+}
+
+#geslo{
+
+    margin-left: 30px;
+    padding-top: 5px;
+}
+
+#add_button{
+    float: right;
+    padding-top: 5px;
+    margin-right: 20px;
+}
+
+#del_button{
+    float: right;
+    padding-top: 5px;
+    margin-right: 30px;
+}
+
+#begin{
+    margin-left: 330px;
+}
+
+#next{
+    float: right;
+    margin-right: 50px;
+}

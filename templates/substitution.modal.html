@@ -1,0 +1,24 @@
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Čestitke uspelo vam je rešiti uganko v
+            <label id="modal-time-minute"></label>
+              minutah in <label id="modal-time-second"></label> sekundah!
+          </h4>
+        </div>
+        <div class="modal-body">
+          <input type="text" class="form-control" id="username" placeholder="Ime igralca (3 črke)">
+        </div>
+        <div class="modal-footer">
+            <button id="confirm" type="submit" class="btn btn-success btn-default pull-left"><span class="glyphicon glyphicon-ok"></span> Potrdi</button>
+            <button id="cancel" type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Prekliči</button>
+            <div id="modal-alert" class="alert alert-danger" role="alert">Preverite svoj vnos!</div>
+        </div>
+      </div>
+
+    </div>
+</div>

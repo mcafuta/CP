@@ -1,0 +1,62 @@
+{% extends "index.html" %}
+{% block body %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery.jqplot.min.css') }}"/>
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/vegenere.css')}}" />
+
+<script type="text/javascript" src = "{{url_for('static', filename='vegenere.js')}}"></script>
+<script type="text/javascript">
+    input = {{input|safe}};
+    lang = "{{lang}}";
+    foreign = {% if foreign %} true {% else %} false {% endif %};
+    next = "{{url_for('.play', difficulty = difficulty, idx = next)}}";
+    difficulty = "{{difficulty}}";
+    window.onload = function(){initialize({{level}});};
+</script>
+
+<div class="row">
+   <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="panel panel-default" >
+            <div class="panel-heading" id="glava">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <b><span class="pozdrav1">Kriptogram</span></b>
+                    </div>
+                    <div id ="buttons">
+                            <button value = "Begin" class="btn btn-default btn-bg" id="begin">Začni</button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="container-fluid">
+                    <div class="row-fluid">
+                        
+                        <div class="col-lg-12 col-md-12 col-sm-12" id = "coreLogic">
+                                            
+                        </div>
+                        <div class="row">
+                            <div id ="button_del" style="float='right'">
+                                <button value = "delLetter" class="btn btn-default btn-bg" id="del_button" onclick="deleteKeyLetter(-1)">Delete letter</button>
+                            </div>
+                            <div id ="button_add" style="float='right'">
+                                <button value = "addLetter" class="btn btn-default btn-bg" id="add_button" onclick="addKeyLetter()">Add letter</button>
+                            </div>
+
+                            <div id="geslo">
+                                Geslo:
+                                <div class="wordDisplay"></div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12" id = "Text">
+                            <br>
+                            <textarea rows ="5" id  = "messageOutput" readonly></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

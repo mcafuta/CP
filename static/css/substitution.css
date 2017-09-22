@@ -1,0 +1,428 @@
+/* NAV BAR */
+#nav-bar-2 {
+    height: 51px;
+    margin-top: 30px;
+    border-radius: 8px 8px 0 0;
+    background-color: #467892;
+    position: relative;
+}
+#nav-bar-container {
+    text-align: center;
+    padding-top: 3px;
+}
+#nav-bar-title {
+    color: #eeeeee;
+    font-weight: bold;
+    font-size: 20px;
+    vertical-align: middle;
+    display: inline-block;
+}
+#btn-next, #btn-reset {
+    color: #eeeeee;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0 10px 0 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#next:hover, #reset:hover {
+    background-color: #5b93b0;
+}
+/* MAIN CONTAINER */
+#container-logic {
+    width: 100%;
+    padding: 40px 40px 20px 40px;
+    margin: 0 auto;
+    background-color: #FFFFFF;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+/* FREE LETTERS */
+/* Box displaying which letters are available for substitution */
+#freeLetterContainer {
+    width: 100%;
+    text-align: center;
+}
+/* Letters that are available for substitution */
+.freeLetter{
+    text-align: center;
+	font-weight: bold;
+    width: 29px;
+    height: 35px;
+    line-height: 30px;
+    font-size: 20px;
+    margin-right: 3px;
+    display: inline-block;
+    position: relative;
+}
+.freeLetterDisplay {
+    color: #467892;
+    border-radius: 5px;,
+    background-color: #eeeeee;
+    border: 2px solid #467892;
+}
+.freeLetterDisplayHover {
+    border-color: #f9a333;
+    color: #f9a333;
+}
+
+/* ENCRYPTED LETTERS */
+/* Box displaying both the original message and its updated substituted equivalent */
+#encryptedLetterContainer{
+    width: 100%;
+    background-color: #eeeeee;
+    text-align: left;
+    border: 3px solid #467892;
+    border-radius: 10px;
+    margin-top: 20px;
+	padding: 10px;
+}
+/* Words are displayed individually in their own wordDisplay elements in the encryptedLetterContainer */
+.wordContainer{
+    display: inline-block;
+    margin-bottom: 2px;
+}
+/* Letters that contain a space */
+.letterSpace{
+    display: inline-block;
+    width: 29px;
+    padding-left: 10px;
+	padding-right: 10px;
+    padding-top: 6px;
+}
+/* Letters contained in the wordContainer  */
+.wordLetter {
+    display: inline-block;
+    position: relative;
+    width: 29px;
+    height: 35px;
+}
+/* Letter input contained in the wordLetter */
+.letterInput {
+    width: 29px;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+}
+/* Class to manage letterInput style */
+.letterInputDisplay {
+    color: #eeeeee;
+    border-radius: 5px;
+    background-color: #467892;
+    border: 1px solid #eeeeee;
+}
+.letterInputDisplayHover {
+    color: #467892;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    border: 1px solid #467892;
+}
+/* Letter input representign characters not A-Z */
+.letterInputPunctuation {
+    width: 29px;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+    border-radius: 5px;
+    background-color: #eeeeee;
+    border: 2px solid #eeeeee;
+}
+/* SOLVED MESSAGE  */
+/* Box where the user can see the solved/in progress message */
+#solvedMessageContainer{
+    margin-top: 20px;
+    border-radius: 5px;
+    padding: 5px;
+    border: 2px solid #39434b;
+    font-size: 18px;
+	color: #9d9d9d;
+	width: 100%;
+}
+/* Sets the style of the solved letter in the solvedMessageContainer */
+.messageOutputSolved {
+    color:#39434b;
+    font-weight: bold;
+}
+/* FREQUENCY LETTERS */
+/* Box to display the frequency of each letter */
+#letterFrequencyContainer{
+    width: 100%;
+    margin-top: 20px;
+}
+/* Individual cell in the letterFrequencyContainer to display a letter and its frequency in the message */
+.letterFrequency{
+    display: inline-block;
+    width: 70px;
+    text-align: center;
+    height: 27px;
+    line-height: 15px;
+    font-size: 100%;
+    margin: 5px;
+    padding: 5px;
+}
+.letterFrequencyDisplay {
+    background-color: #39434b;
+    border: 2px solid #f9a333;
+    border-radius: 6px;
+    color: #eeeeee;
+}
+.letterFrequencyDisplaySolved {
+    background-color: #eeeeee;
+    border: 2px solid #467892;
+    border-radius: 6px;
+    color: #39434b;
+}
+.letterFrequencyDisplay:hover{
+    background-color: #eeeeee;
+    border: 2px solid #f9a333;
+    color: #f9a333;
+}
+
+/* ENCRYPTED LETTERS TEXT PLACEHOLDERS */
+
+::-webkit-input-placeholder {
+   font-weight: normal;
+   font-size: 15px;
+   color: #eeeeee;
+   font-family: 'Roboto', sans-serif;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   font-weight: normal;
+   font-size: 15px;
+   font-family: 'Roboto', sans-serif;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   font-weight: normal;
+   font-size: 15px;
+   font-family: 'Roboto', sans-serif;
+}
+
+:-ms-input-placeholder {
+   font-weight: normal;
+   font-size: 15px;
+   background-color: #467892;
+   font-family: 'Roboto', sans-serif;
+}
+
+/* CHARTS */
+
+#chartDiv {
+    margin-top: 20px;
+}
+
+.info-chart {
+    display: inline-block;
+}
+
+.chart {
+    height:200px;
+}
+
+#slider {
+    width: calc(100% - 65px);
+    display: table;
+    margin: auto;
+    margin-left: 40px;
+}
+
+/* TIMER */
+
+#fixed-div {
+    position:fixed;
+    top:20px;
+    right: 20px;
+}
+.pie{
+    width: 60px;
+    height: 60px;
+    display: block;
+    position: relative;
+    border-radius: 50%;
+    background-color: #467892;
+    border: 2px solid #467892;
+    margin: 5px auto;
+}
+.block{
+    position:absolute;
+    background:#fff;
+    width:40px;
+    height: 40px;
+    display:block;
+    border-radius:50%;
+    top:8px;
+    left:8px;
+}
+.time{
+  font-size:2em;
+  position:absolute;
+  top:18%;
+  left:23%;
+  opacity: 0.6;/*color:lighten(#000,60%);*/
+}
+.degree{
+  /*90 + ( 360 * .1 )*/
+      background-image:
+        linear-gradient(90deg, transparent 50%, white 50%),
+        linear-gradient(90deg, white 50%, transparent 50%);
+}
+
+#chartSortButton1 {
+    margin: 10px;
+    border-radius: 10px;
+}
+
+#chartSortButton2 {
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.draggedIn {
+    border-color: #39434b;
+    color: #39434b;
+}
+
+.draggedInHover {
+    background-color: #eeeeee;
+    color: #467892;
+}
+
+#begin{
+	float: right;
+	margin-right: 2%;
+	padding-right: 5%;
+	padding-left: 5%;
+}
+
+#panel-header {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 150px;
+    position: relative;
+}
+
+.wrap {
+   white-space: pre-wrap;      /* CSS3 */
+   white-space: -moz-pre-wrap; /* Firefox */
+   white-space: -pre-wrap;     /* Opera <7 */
+   white-space: -o-pre-wrap;   /* Opera 7 */
+   word-wrap: break-word;      /* IE */
+}
+
+/* POP-UP */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.3);
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 40%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+.modal-body {
+    padding: 25px 16px;
+    background-color: #374148;
+}
+
+.modal-body input {
+    height: 38px;
+    width: 280px;
+    border-radius: 5px;
+    border: none;
+    padding-left: 10px;
+    display: block;
+    margin: auto;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+#buttons {
+    display: block;
+    margin: auto;
+    width: 175px;
+}
+#confirm, #cancel {
+    width: 80px;
+    height: 30px;
+    color: #eee;
+    border-radius: 3px;
+    font-size: 12px;
+    margin-top: 15px;
+}
+#confirm {
+    background-color: #26ae90;
+    border: 1px solid #26ae90;
+    margin-right: 10px;
+}
+#confirm:hover {
+    background-color: #3bb69b;
+}
+#cancel {
+    background-color: #d9534f;
+    border: 1px solid #d9534f;
+}
+#cancel:hover {
+    background-color: #f05c58;
+}
+#header {
+    background-color: #467892;
+    text-align: center;
+}
+#header p {
+    padding: 25px 16px;
+    font-size: 20px;
+    color: #eee;
+}
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* CLOSE button */
+
+.close {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    padding-right: 10px;
+    color: #374148;
+}
+.close:hover,.close:focus {
+    color: rgba(55, 65, 72, 0.8);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#modal-alert {
+    display: none;
+    height: 35px;
+    line-height: 35px;
+    padding: 0 15px;
+    margin-bottom: 1px;
+}

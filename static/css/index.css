@@ -1,0 +1,180 @@
+/*  BODY  */
+
+#nav-bar-2 {
+    background-color: #467892;
+    height: 70px;
+    margin-top: 30px;
+    border-radius: 8px 8px 0 0;
+}
+#nav-bar-2 h2 {
+    color: #eee;
+    padding-top: 14px;
+    padding-left: 30px;
+    font-size: 16px;
+    display: inline-block;
+    font-weight: bold;
+}
+#left {
+    float: left;
+    width: 867px;
+    border: 1px solid #ccc;
+    height: 680px;
+    border-top: none;
+}
+#right {
+    float: left;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-top: none;
+    border-bottom: none;
+    width: 303px;
+    height: 680px;
+    background-color: #fff;
+}
+
+/* RIGHT SIDE */
+
+#kvizko {
+    float: left;
+}
+#kvizko img {
+    width: 110px;
+    padding: 35px 20px 20px 25px;
+    float: left;
+}
+#kvizko button {
+    background-color: #26ae90;
+    width: 145px;
+    height: 38px;
+    border: 1px solid #26ae90;
+    color: #fff;
+    border-radius: 6px;
+    font-weight: bold;
+    float: left;
+    margin-top: 50px;
+    font-size: 14px;
+}
+#kvizko button:hover {
+    background-color: rgba(38, 174, 144, 0.9);
+}
+#kvizko a:link {
+    text-decoration: none;
+    color: #eee;
+}
+#kvizko a:visited {
+    text-decoration: none;
+    color: #eee;
+}
+#kvizko p {
+    padding: 10px 25px 5px 30px;
+    font-size: 14px;
+    line-height: 22px;
+    clear: both;
+}
+
+/* LEFT SIDE */
+
+#text {
+    background-color: #fff;
+    height: 410px;
+}
+#text p {
+    padding-left: 25px;
+    padding-right: 25px;
+    line-height: 24px;
+    font-size: 15px;
+    clear: both;
+}
+#first-p {
+    padding-top: 30px;
+}
+#second-p {
+    padding-top: 20px;
+}
+#text strong {
+    color: #374148;
+}
+#text h3 {
+    padding-left: 25px;
+    font-size: 22px;
+    color: #374148;
+    float: left;
+    margin-top: 38px;
+}
+
+#riddle {
+    height: 270px;
+    background-color: #fff;
+}
+#riddle img {
+    float: left;
+    height: 80px;
+    margin-left: 25px;
+}
+#riddle button {
+    background-color: #fa6b5c;
+    width: 140px;
+    height: 38px;
+    border: 1px solid #fa6b5c;
+    color: #fff;
+    border-radius: 6px;
+    font-weight: bold;
+    margin-top: 25px;
+    margin-left: 25px;
+    float: left;
+    font-size: 14px;
+}
+#riddle button:hover {
+    background-color: rgba(250, 107, 92, 0.9);
+}
+#riddle-txt {
+    clear: both;
+    margin-left: 127px;
+    margin-right: 30px;
+    border: 2px dotted #ccc;
+    padding: 20px;
+    font-size: 15px;
+}
+
+/* FOOTER */
+
+#newsletter {
+    height: 290px;
+    clear: both;
+    background-color: #374148;
+}
+#newsletter h3 {
+    font-size: 24px;
+    color: #eee;
+    padding-top: 60px;
+    text-align: center;
+}
+#newsletter p {
+    color: #697790;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 15px;
+}
+#newsletter input {
+    height: 38px;
+    width: 300px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 60px;
+    padding-left: 20px;
+    margin-left: 370px;
+    font-size: 14px;
+}
+#newsletter button {
+    background-color: #26ae90;
+    width: 110px;
+    height: 40px;
+    border: 1px solid #26ae90;
+    color: #eee;
+    border-radius: 6px;
+    margin-left: 20px;
+    font-size: 17px;
+}
+#newsletter button:hover {
+    background-color: #3bb69b;
+}

@@ -1,0 +1,67 @@
+{% extends "header.html" %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/index.css')}}" />
+{% endblock %}
+{% block body %}
+    <div id="nav-bar-2"><h2>Dobrodošli na kriptografski strani</h2></div>
+    <section id="left">
+        <div id="text">
+            <p id="first-p">Dobrodošli na spletni strani
+                <strong>Kriptogram</strong>, ki je nastala v sklopu projekta
+                E-vsebine v izobraževanju in je namenjena vsem vedoželjnim, še
+                posebej tistim, ki radi rešujete kriptografske uganke.<br><br>Sprehodite
+                se v svet zamenjalnih besedil in z reševanjem odkrivajte lepe
+                pregovore in besedila.
+                Glavni poudarek projekta je aplikacija Kvizko za e-učenje, ki
+                omogoča interaktivno in izzivov polno pridobivanje novega
+                znanja.</p>
+            <h3>Kaj je kriptogram?</h3>
+            <p id="second-p">Kriptogram je načeloma vsako zašifrirano
+                sporočilo. Običajno je šifra, ki jo uporabljena v takem
+                besedilu, dovolj enostavna, da jo rešimo ročno. Pogosto se
+                uporabljajo zamenjalne šifra, kjer je vsaka črka zamenjana z
+                različno črko ali številko.<br>Za rešitev uganke je potrebno
+                tako poiskati prvotno sporočilo. Čeprav so včasih zamenjalne
+                šifre uporabljali v resne namene, jih danes večinoma najdemo v
+                zabavnem tisku, v časopisih ali revijah.</p>
+        </div>
+        <div id="riddle">
+            <img src={{ url_for('static', filename='images/bell.png') }}>
+            <button id="riddle-btn">Uganka tedna</button>
+            <p id="riddle-txt">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit. Aenean purus elit, dignissim a diam nec,
+                placerat rhoncus enim. Donec nec varius turpis. Sed ac risus
+                auctor, blandit tortor pharetra, semper dolor. Proin ac elit
+                viverra, congue metus vel, sodales urna. Pellentesque habitant
+                morbi tristique senectus et netus et malesuada fames ac turpis
+                egestas.</p>
+        </div>
+    </section>
+    <section id="right">
+        <div id="kvizko">
+            <img src={{ url_for('static', filename='images/e-kvizko.png') }}>
+            <button><a href="https://equiz.fri.uni-lj.si/welcome"
+                       target="_blank">Aplikacija Kvizko</a></button>
+            <p>Aplikacija je namenjena prenosu naravoslovnih ved izza pisalne
+                mize, preobremenjene s kupi knjig in zvezkov v vsakdanje
+                življenje. Omogočimo miselno zabavo kjerkoli in kadarkoli. <br><br>40
+                let skrbno izbranih problemov (z izpeljanimi rešitvami)
+                približa široki množici mladih in starejših. Vsebuje odprti
+                skupini Bober in Presek, preko katerih lahko vsakdo rešuje
+                naloge za tekmovanja ali za krajšanje prostega časa. </p>
+        </div>
+    </section>
+    <div id="newsletter">
+        <h3>Kriptografske novice</h3>
+        <p>Naročite se na kriptografske novice</p>
+        <input type="email" placeholder="E-mail">
+        <button>Potrdi</button>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#riddle-btn").click(function () {
+                $("#riddle-txt").toggle();
+            });
+        });
+    </script>
+{% endblock %}
