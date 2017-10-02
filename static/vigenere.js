@@ -654,6 +654,30 @@ function substitute(original, substitution){
     }*/
 }
 
+//check matching with original
+check = function(){
+    shash = hash(document.getElementById("messageOutput").value);
+    console.log(shash + " " + hashcode);
+    if(shash == hashcode)
+        return true;
+    else return false;
+}
+
+//simple hash - source: http://www.erlycoder.com/49/javascript-hash-functions-to-convert-string-into-integer-hash-
+hash = function(str){
+    var hash = 0;
+    if (str.length == 0) return hash;
+    for (i = 0; i < str.length; i++) {
+        char = str.charCodeAt(i);
+        if(char == ' ') continue;
+        hash = ((hash<<5)-hash)+char;
+        console.log(hash);
+        hash = hash & hash; // Convert to 32bit integer
+    }
+    return hash;
+}
+
+
 // resets all relevent data in the webpage
 function reset(){
     for (var i = 0; i < ALPHABET.length; i++) {

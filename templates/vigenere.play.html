@@ -1,15 +1,16 @@
 {% extends "index.html" %}
 {% block body %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery.jqplot.min.css') }}"/>
-<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/vegenere.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/vigenere.css')}}" />
 
-<script type="text/javascript" src = "{{url_for('static', filename='vegenere.js')}}"></script>
+<script type="text/javascript" src = "{{url_for('static', filename='vigenere.js')}}"></script>
 <script type="text/javascript">
     input = {{input|safe}};
     lang = "{{lang}}";
     foreign = {% if foreign %} true {% else %} false {% endif %};
     next = "{{url_for('.play', difficulty = difficulty, idx = next)}}";
     difficulty = "{{difficulty}}";
+    hashcode = "{{hashcode}}";
     window.onload = function(){initialize({{level}});};
 </script>
 
@@ -34,11 +35,14 @@
                                             
                         </div>
                         <div class="row">
+                            <div id ="button_check" style="float='right'">
+                                <button value = "check" class="btn btn-default btn-bg" id="check_button" onclick="check()">Preveri</button>
+                            </div>
                             <div id ="button_del" style="float='right'">
-                                <button value = "delLetter" class="btn btn-default btn-bg" id="del_button" onclick="deleteKeyLetter(-1)">Delete letter</button>
+                                <button value = "delLetter" class="btn btn-default btn-bg" id="del_button" onclick="deleteKeyLetter(-1)">Izbriši črko</button>
                             </div>
                             <div id ="button_add" style="float='right'">
-                                <button value = "addLetter" class="btn btn-default btn-bg" id="add_button" onclick="addKeyLetter()">Add letter</button>
+                                <button value = "addLetter" class="btn btn-default btn-bg" id="add_button" onclick="addKeyLetter()">Dodaj črko</button>
                             </div>
 
                             <div id="geslo">

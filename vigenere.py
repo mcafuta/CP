@@ -5,7 +5,7 @@ import random
 import json
 import re
 
-app = Blueprint('vegenere', __name__)
+app = Blueprint('vigenere', __name__)
 
 abc = u"ABCČDEFGHIJKLMNOPQRSŠTUVWXYZŽ"
 
@@ -53,7 +53,7 @@ def getText2(id):
     cur.close()
     return (txt[0].decode("UTF-8"), txt[1])
 
-#hardcoded text dokler ni povezave na bazo
+#se ni povezave na bazo
 def getText(id):
     txt = "LOREM IPSUM DOLOR SIT AMET, CONSECTETUER ADIPISCING ELIT, SED DIAM NONUMMY NIBH EUISMOD TINCIDUNT UT LAOREET DOLORE MAGNA ALIQUAM ERAT VOLUTPAT."
     return (txt, 'en')
@@ -61,11 +61,11 @@ def getText(id):
 #zasifrira sporocilo
 def crypt(text, keyword, lang = None):
     xyz = [x for x in abc if x not in foreign.get(lang)]
-    print(xyz)
+    #print(xyz)
     keyword = [x.upper() for x in keyword]
     #keyphrase = [keyword[x%len(keyword)] if not text[x].isspace() else ' ' for x in range(0,len(text))]
     keyphrase = [keyword[x % len(keyword)] for x in range(0, len(text))]
-    print(keyphrase)
+
     #pri presledku preskoci crko iz gesla
     #enc_text = [xyz[(xyz.index(text[i]) + xyz.index(keyphrase[i]))%len(xyz)] if ((not text[i].isspace()) and text[i] in xyz) else text[i] for i in range(0,len(text))]
     #print(enc_text);
@@ -81,13 +81,28 @@ def crypt(text, keyword, lang = None):
         ix+=1
     enc_text = [xyz[(xyz.index(text[i]) + xyz.index(keyphrase[i])) % len(xyz)] if not text[i].isspace() and text[i].isalpha() else text[i] for i in range(0, len(text))]
     #return enc_text
-    print(enc_text)
+    #print(enc_text)
     return ''.join(enc_text)
+
+def hash(ctext):
+    hashc = 0
+    if  len(ctext) == 0:
+        return hashc
+    for i in range(0, len(ctext)):
+        char = ctext[i]
+        if not char.isalpha():
+            continue
+
+        hashc = ((hashc << 5)-hashc)+abc.index(char)
+        #print(hashc)
+        hashc = hashc & hashc
+    return hashc
+
 
 
 @app.route("/")
 def index():
-    return redirect('vegenere/easy')
+    return redirect('vigenere/easy')
 
 
 @app.route("/<difficulty>")
@@ -105,20 +120,21 @@ def play(difficulty, idx=-1, language=None):
         level = 0
     #najde id-je? vseh primernih textov glede na izbran lvl&lang
     if idx < 0 and level == 3:
-        return render_template("vegenere.ready.html", num=0)
+        return render_template("vigenere.ready.html", num=0)
     if idx < 0 or idx >= 1:
         idx = 0
     text, lang = getText('X')
-    print(text)
+    #print(text)
     keyword = keywords(level, 'en')
     if level == 3:
         cipher = text
     else:
         cipher = crypt(text, keyword, 'en')
-    return render_template("vegenere.play.html",
-                           nav="vegenere", next=(idx + 1) % 1, lang=lang,
+        hashcode = hash(cipher)
+    return render_template("vigenere.play.html",
+                           nav="vigenere", next=(idx + 1) % 1, lang=lang,
                            difficulty=difficulty, level=level, input=json.dumps(cipher),
-                           foreign=len(foreign[lang].intersection(text.upper())) > 0)
+                           foreign=len(foreign[lang].intersection(text.upper())) > 0, hashcode=hashcode)
 
 def play2(difficulty, idx=-1, language=None):
     if (difficulty == "ready"):
@@ -133,7 +149,7 @@ def play2(difficulty, idx=-1, language=None):
     texts = indices(level, language)
     #ka je ta ready???
     if idx < 0 and level == 3:
-        return render_template("vegenere.ready.html", num=len(texts))
+        return render_template("vigenere.ready.html", num=len(texts))
     #izbere random index iz mnozice ustreznih
     if idx < 0 or idx >= len(texts):
         idx = random.randrange(len(texts))
@@ -146,8 +162,8 @@ def play2(difficulty, idx=-1, language=None):
         cipher = text
     else:
         cipher = crypt(text, keyword, language)
-    return render_template("vegenere.play.html",
-                           nav="vegenere", next=(idx + 1) % len(texts), lang=lang,
+    return render_template("vigenere.play.html",
+                           nav="vigenere", next=(idx + 1) % len(texts), lang=lang,
                            difficulty=difficulty, level=level, input=json.dumps(cipher),
                            foreign=len(foreign[lang].intersection(text.upper())) > 0)
 
